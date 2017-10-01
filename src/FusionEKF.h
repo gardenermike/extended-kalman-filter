@@ -44,6 +44,13 @@ private:
   Eigen::MatrixXd R_radar_;
   Eigen::MatrixXd H_laser_;
   Eigen::MatrixXd Hj_;
+  const float noise_ax = 9;
+  const float noise_ay = 9;
+
+  void InitializeFirstMeasurement(const MeasurementPackage &measurement_pack);
+  void MakePrediction(const MeasurementPackage &measurement_pack);
+  void MakeUpdate(const MeasurementPackage &measurement_pack);
+  void SetQ(const float &dt);
 };
 
 #endif /* FusionEKF_H_ */
