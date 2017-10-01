@@ -97,10 +97,12 @@ void FusionEKF::InitializeFirstMeasurement(const MeasurementPackage &measurement
       float vx = rho_dot * cos(phi);
       float vy = rho_dot * sin(phi);
       ekf_.x_ << x, y, vx , vy;
+      ekf_.R_ = R_radar_;
     }
     else if (measurement_pack.sensor_type_ == MeasurementPackage::LASER) {
       //set the state with the initial location and zero velocity
       ekf_.x_ << measurement_pack.raw_measurements_[0], measurement_pack.raw_measurements_[1], 0, 0;
+      ekf_.R_ = R_laser_;
     }
 
     // done initializing, no need to predict or update
