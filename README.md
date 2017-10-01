@@ -1,6 +1,8 @@
 # Extended Kalman Filter Project
 Udacity Self-Driving Car Engineer Nanodegree Program
 
+![Simulator](./simulator.png "Simulator in process")
+
 This project uses an [extended Kalman filter](https://en.wikipedia.org/wiki/Extended_Kalman_filter) to combine radar and lidar measurements to track a bicycle circling a car in a simulator.
 
 The simulator can be downloaded from the [github repository](https://github.com/udacity/self-driving-car-sim/releases).
