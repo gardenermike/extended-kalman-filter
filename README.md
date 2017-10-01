@@ -16,7 +16,12 @@ The README at that repository has extensive details for build and setup.
 2. Make a build directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make` 
    * On windows, you may need to run: `cmake .. -G "Unix Makefiles" && make`
-4. Run it: `./ExtendedKF `
+4. Run it: `./ExtendedKF`
+
+## Files
+[tools.cpp](https://github.com/gardenermike/extended-kalman-filter/blob/master/src/tools.cpp) implements helper functions to compute the root mean squared error between two vectors, and the Jacobian matrix of a vector.
+[kalman_filter.cpp](https://github.com/gardenermike/extended-kalman-filter/blob/master/src/kalman_filter.cpp) implements prediction and update steps for the Kalman filter. Note that this implementation uses only linear prediction, so there is no extended non-linear step for prediction. There are separate functions for update of radar and lidar data, with only the non-linear radar updates needing the kalman filter extension. Most of the `UpdateEKF` function is converting the `x_` vector of location and velocity into polar coordinates, and normalizing the angle phi to be in the same range for both incoming and predicted data. The remainder of the update step is identical, but the `H_` matrix used for prediction has been replaced by the jacobian of the sensor data.
+[FusionEKF.cpp](https://github.com/gardenermike/extended-kalman-filter/blob/master/src/FusionEKF.cpp) implements the measurement handler that sets up the KalmanFilter class for the predict and update loop.
 
 ## Discussion
 The basic idea of the Kalman filter is to model the position of a moving object with an assumption of linear motion, using a Gaussian distribution to model uncertainty. As time passes, the variance of the distribution is expected to increase, as uncertainty increases. Measurement increases certainty, shifting the mean of the distribution and reducing the variance.
